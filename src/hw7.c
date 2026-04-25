@@ -1,5 +1,10 @@
+//Brandon Moy - 116187802
+
 #include "hw7.h"
 
+
+
+//Insert a matrix into the bst
 bst_sf* insert_bst_sf(matrix_sf *mat, bst_sf *root) {
     if (root == NULL){
         bst_sf *new_node = malloc(sizeof(bst_sf));
@@ -21,6 +26,7 @@ bst_sf* insert_bst_sf(matrix_sf *mat, bst_sf *root) {
 
 }
 
+// find a matrix in the bst
 matrix_sf* find_bst_sf(char name, bst_sf *root) {
     if (root == NULL) return NULL;
 
@@ -37,6 +43,7 @@ matrix_sf* find_bst_sf(char name, bst_sf *root) {
 
 }
 
+// free a bst
 void free_bst_sf(bst_sf *root) {
     if (root == NULL) return;
     
@@ -71,6 +78,7 @@ matrix_sf* add_mats_sf(const matrix_sf *mat1, const matrix_sf *mat2) {
 
 }
 
+//Multiply two matrixes
 matrix_sf* mult_mats_sf(const matrix_sf *mat1, const matrix_sf *mat2) {
    unsigned int m = mat1->num_rows;
    unsigned int n = mat1->num_cols; // cols of mat1 and rows of mat2
@@ -97,6 +105,7 @@ matrix_sf* mult_mats_sf(const matrix_sf *mat1, const matrix_sf *mat2) {
     return res;
 }
 
+// COmpute the transpose of a matrix
 matrix_sf* transpose_mat_sf(const matrix_sf *mat) {
     unsigned int rows = mat->num_rows;
     unsigned int cols = mat->num_cols;
@@ -119,6 +128,7 @@ matrix_sf* transpose_mat_sf(const matrix_sf *mat) {
     
 }
 
+// Create a matrix
 matrix_sf* create_matrix_sf(char name, const char *expr) {
     unsigned int rows, cols;
 
@@ -161,6 +171,8 @@ int weight(char o) {
     else if (o == '+') return 1;
     else return 0;
 }
+
+// Infix2postfix function
 char* infix2postfix_sf(char *infix) {
     int len = strlen(infix);
     char *postfix = malloc(len+1);
@@ -215,6 +227,7 @@ char* infix2postfix_sf(char *infix) {
     return postfix;
 }
 
+// Evaluate a given expression
 matrix_sf* evaluate_expr_sf(char name, char *expr, bst_sf *root) {
     //Steps
     //1. Convert the given infix exression to postfix
@@ -275,6 +288,7 @@ matrix_sf* evaluate_expr_sf(char name, char *expr, bst_sf *root) {
             stack[last] = res;
         }      
     }
+    //3.
     matrix_sf *final = stack[last];
     last--;
     final->name = name;
@@ -283,6 +297,7 @@ matrix_sf* evaluate_expr_sf(char name, char *expr, bst_sf *root) {
     return final;
 }
 
+// Execute a given script
 matrix_sf *execute_script_sf(char *filename) {
     FILE *fp = fopen(filename, "r");
     if (fp == NULL) return NULL;
